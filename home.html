@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Mappa</title>
+
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
+
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<style>
+	body { margin:0; padding:0; }
+	
+	</style>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, user-scalable = no" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1" />
+</head>
+<body>
+	
+	<div id='map'></div>
+
+
+	<script>
+	var map = L.mapbox.map('map', 'djgiors4.hc3h5o07', {zoomControl:false}).setView([45.6968568,12.2675322], 17);
+new L.Control.Zoom({ position: 'topright' }).addTo(map);
+new L.mapbox.geocoderControl('djgiors4.hc3h5o07',{ position: 'topright' }).addTo(map);
+// The GeoJSON representing the two point features
+var zoomers = document.getElementsByClassName('leaflet-control-zoom');
+zoomers[0].style.opacity=0.6;
+var geocoderSt = document.getElementsByClassName('leaflet-control-mapbox-geocoder');
+geocoderSt[0].style.opacity=0.6;
+
+var coloreAppezzamenti = '#4397bf';
+var geoJson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+            title: 'Campo 3',
+            fill:coloreAppezzamenti,
+            "fill-opacity":0.2,
+            stroke:coloreAppezzamenti,
+            "stroke-opacity":1,
+            "stroke-width":4,
+            url: 'sampling_type.html'
+        },
+        geometry: {
+            type: 'Polygon',
+            coordinates: [[[12.269024848937987,45.695501659971384],[12.269196510314941,45.69562905418698],[12.269421815872192,45.69582389183777],[12.269947528839111,45.69595877904448],[12.270569801330566,45.6951194755832],[12.270344495773315,45.69503704331392],[12.270516157150269,45.694827215171046],[12.269904613494873,45.69454244714645],[12.269024848937987,45.695501659971384]]]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Campo 1',
+            "fill":coloreAppezzamenti,
+            "fill-opacity":0.2,
+            "stroke":coloreAppezzamenti,
+            "stroke-opacity":1,
+            "stroke-width":4,
+            url: 'sampling_type.html'
+        },
+        geometry: {
+            type: 'Polygon',
+            coordinates: [[[12.264776229858398,45.69565902925438],[12.265398502349854,45.69532930262948],[12.26624608039856,45.69613862814732],[12.265634536743164,45.69644586902654],[12.264776229858398,45.69565902925438]]]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Campo 2',
+            "fill":coloreAppezzamenti,
+            "fill-opacity":0.2,
+            "stroke":coloreAppezzamenti,
+            "stroke-opacity":1,
+            "stroke-width":4,
+            url: 'sampling_type.html'
+        },
+        geometry: {
+            type: 'Polygon',
+            coordinates: [[[12.26625680923462,45.697352594462],[12.267147302627563,45.69932336019586],[12.269142866134642,45.698828801939285],[12.269175052642822,45.69861898802406],[12.268617153167725,45.69737507507115],[12.26625680923462,45.697352594462]]]
+        }
+    }]
+};
+
+// Pass features and a custom factory function to the map
+map.featureLayer.setGeoJSON(geoJson);
+console.log(geoJson.features[0].properties.title);
+map.featureLayer.on('click', function(e) {
+    //document.open(e.layer.feature.properties.url);
+    window.location.href = (e.layer.feature.properties.url);
+});
+
+
+</script>
+
+<div id="top-bar"><h2 class="guida">Seleziona un appezzamento tra quelli disponibili.</h2><canvas id="myCanvas" width="50" height="50"></canvas></div>
+
+<a href="home_v2.html"><div id="home-btn"><img src="images/home-32.png"></div></a>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 18;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, -0.5*Math.PI, -0.4*Math.PI, false);
+      context.lineWidth = 4;
+      context.strokeStyle = '#fff';
+      context.stroke();
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2*Math.PI, false);
+      context.lineWidth = 1;
+      context.stroke(); 
+
+      context.fillStyle = "#fff";
+      context.textAlign = 'center';
+        context.font = "regular 16px Georgia";
+        context.fillText("5%", centerX, centerY+2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Design del Voronoi</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, user-scalable = no" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1" /><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <style>
+
+
+body {
+  background-image: url("images/satellite.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+#nzone {
+  position: absolute;
+  top: 65px;
+  left: 70px;
+}
+#nzone a {
+  float: left;
+  margin-right: 10px;
+  height: 46px;
+  width: 48px;
+
+}
+#nzone p {
+  text-align: center;
+  font-weight: bolder;
+  text-decoration: none;
+  margin-top: 12px;
+}
+.btn {
+  color: #fff;
+  background-color: #1087bf;
+  border-bottom: 2px solid #326781;
+}
+.attivo {
+  color: #1087bf;
+  background-color: #fff;
+  border-bottom: 2px solid #fff;
+}
+.pattern {
+  position: absolute;
+  display: none;
+}
+.visibile{
+  display: block;
+}
+</style>
+
+
+</head>
+<body id="bodder">
+
+<img class="pattern" id="z2" src="images/zone/z2.png">
+<img class="pattern" id="z3" src="images/zone/z3.png">
+<img class="pattern visibile" id="z4" src="images/zone/z4.png">
+<img class="pattern" id="z5" src="images/zone/z5.png">
+<img class="pattern" id="z6" src="images/zone/z6.png">
+
+
+<div id="nzone">
+  <a id="sel2" value="z2" class="btn" href="#"><p>2</p></a>
+  <a id="sel3" value="z3" class="btn" href="#"><p>3</p></a>
+  <a id="sel4" value="z4" class="btn attivo" href="#"><p>4</p></a>
+  <a id="sel5" value="z5" class="btn" href="#"><p>5</p></a>
+  <a id="sel6" value="z6" class="btn" href="#"><p>6</p></a>
+</div>
+
+  <a href="home.html">
+    <div id="home-btn">
+      <img src="images/home-32.png">
+    </div>
+  </a>
+
+  <a href="data_selection.html" id="indietro-btn">
+      <img src="images/indietro.png">
+  </a>
+
+  <a href="drag_voronoi.html" id="valido-btn">
+      <img src="images/valido.png">
+  </a>
+
+
+
+<div id="top-bar">
+  <h2 class="guida">Seleziona il numero di zone omogenee che vuoi creare.</h2>
+  <canvas id="myCanvas" width="50" height="50"></canvas>
+</div>
+
+<script type="text/javascript">
+var counter = 0;
+$(document).ready(function () {
+  //$('body').bind('touchmove', function(e){e.preventDefault()});
+  $(".btn").on("click", function (e) {
+        $('.btn').removeClass('attivo');
+        $(this).addClass('attivo');
+        $('.pattern').removeClass('visibile');
+        var temp = '#'+$(this).attr("value");
+        $(temp).addClass('visibile');
+
+
+      });
+  
+
+});
+
+</script>
+
+
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 18;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, -0.5*Math.PI, 0.3*Math.PI, false);
+      context.lineWidth = 4;
+      context.strokeStyle = '#fff';
+      context.stroke();
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2*Math.PI, false);
+      context.lineWidth = 1;
+      context.stroke(); 
+
+      context.fillStyle = "#fff";
+      context.textAlign = 'center';
+        context.font = "regular 16px Georgia";
+        context.fillText("40%", centerX, centerY+2);
+    </script>
+    <script type="text/javascript">
+ window.onload=function(){
+
+  var a=document.getElementsByTagName("a");
+  for(var i=0;i<a.length;i++)
+  {
+    a[i].onclick=function()
+    {
+      window.location=this.getAttribute("href");
+      return false
+    }
+  }
+};</script>
+ </body>
+</html>
